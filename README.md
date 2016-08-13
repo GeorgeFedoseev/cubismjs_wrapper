@@ -73,5 +73,3 @@ var default_options = {
   }
 }
 ```
-
-Simple class wrapper for Cubism.js
