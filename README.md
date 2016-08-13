@@ -3,7 +3,7 @@ Wrapper for [Cubism.js](https://square.github.io/cubism/) time series visualizat
 Written for rendering static data using Cubism.js.  
 Also includes auto color palette generation from two main colors.
 
-**Dependencies**: jquery, ds.js, cubism.js
+**Dependencies**: jquery, d3.js, cubism.js
 
 ![](https://github.com/TrueGuy/cubismjs_wrapper/raw/master/screenshots/screenshot_1.png)
 
