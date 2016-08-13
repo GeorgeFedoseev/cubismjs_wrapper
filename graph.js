@@ -21,8 +21,6 @@ class Graph {
       }
     };
 
-
-
     this.options = $.extend({}, default_options, options);
 
     if(!this._check_options()){
@@ -81,9 +79,6 @@ class Graph {
         .size(_size)
         .stop();
 
-    // create a new metric
-    // this allows you to retrieve values from some source
-    // this is data-source agnostic, so this does not matter.
     var graphMetric = graphContext.metric(this.options.data_function, this.options.name);
 
     // here we create a new element and then append it to our
@@ -93,12 +88,9 @@ class Graph {
     $(graphElement).attr("id", this._graph_id());
     this.options.container.append(graphElement);
     d3.select(graphElement).call(function(div) {
-
         div.append("div")
             .attr("class", "axis")
             .call(graphContext.axis().orient("top"));
-
-
 
         div.selectAll(".horizon")
             .data([graphMetric])

@@ -201,9 +201,12 @@ h1, h2 {
   line-height: 30px;
   margin: 0 6px;
   position: absolute;
-  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  text-shadow: -1px -1px 1px rgba(255,255,255, 1);
   white-space: nowrap;
+
 }
+
+
 
 .horizon .title {
   left: 0;
@@ -211,6 +214,7 @@ h1, h2 {
 
 .horizon .value {
   right: 0;
+  display: none;
 }
 
 .line {
