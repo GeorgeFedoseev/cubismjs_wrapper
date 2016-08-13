@@ -1,5 +1,5 @@
 # Cubism.js wrapper for static data
-Wrapper for [Cubism.js](https://square.github.io/cubism/) time series visualization library.  
+Wrapper for <a href="https://square.github.io/cubism/" target="_blank">Cubism.js</a> time series visualization library.  
 Written for rendering static time series using Cubism.js.  
 Also includes auto color palette generation from two main colors.
 
