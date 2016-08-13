@@ -3,13 +3,14 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: "Helvetica Neue", Helvetica;
   margin: auto;
   margin-top: 40px;
   margin-bottom: 4em;
+  padding: 25px;
 }
 
-#body {
+#main_container {
   position: relative;
 }
 
@@ -144,7 +145,7 @@ h2 {
 }
 
 h1, h2 {
-  font-family: "Yanone Kaffeesatz";
+  /*font-family: "Yanone Kaffeesatz";*/
   text-rendering: optimizeLegibility;
 }
 
