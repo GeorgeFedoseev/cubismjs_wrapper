@@ -67,7 +67,7 @@ var default_options = {
       stop = +stop;
       while (start < stop) {
           start += step;
-          values.push(Math.sin(start*0.01)/1);
+          values.push(Math.sin(start*0.01));
       }
       callback(null, values);
   }
