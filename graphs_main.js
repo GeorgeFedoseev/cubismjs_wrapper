@@ -8,6 +8,6 @@ $(function(){
     to_date: Date.parse("13 Aug 2016"),
     negative_color: "#4595ff",
     show_palette: true
-  });
+  }).render();
 
 });

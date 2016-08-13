@@ -16,7 +16,7 @@ class Graph {
           var values = [];
           //console.log(start);
         //  console.log(+start)
-          start = +start;
+          start = +start; // get numeric representation
           stop = +stop;
           while (start < stop) {
               start += step;
@@ -34,8 +34,10 @@ class Graph {
 
     console.log("Hello im Graph "+this.options.name);
     console.log("My element id is #"+this._graph_id());
+  }
 
-    this._init()
+  render(){
+    this._init();
   }
 
   _check_options() {
