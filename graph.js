@@ -1,3 +1,4 @@
+'use string';
 class Graph {
 
   constructor (options){
@@ -5,10 +6,13 @@ class Graph {
     var default_options = {
       full_width: false,
       width: 500,
+      height: 50,
       from_date: new Date(2016, 7, 13),
       to_date: Date.now(),
       min_value: -1,
       max_value: 1,
+      graph_class: "graph",
+      margin_top: 10,
       negative_color: "#ff4d00",
       positive_color: "#6eff6f",
       show_palette: false,
@@ -38,6 +42,7 @@ class Graph {
 
   render(){
     this._init();
+    return this;
   }
 
   _check_options() {
@@ -56,7 +61,7 @@ class Graph {
   }
 
   _graph_id(){
-    return $.trim(this.options.name).replace(" ", "_");
+    return $.trim(this.options.name).replace(" ", "_").replace(/[.|,]/ig, "");
   }
 
   _horizon_colors(negative_color, positive_color){
@@ -93,19 +98,18 @@ class Graph {
       }
     }
 
-    console.log("Palette: "+colors);
+  //  console.log("Palette: "+colors);
 
     return colors
   }
 
-  _init(repeated){
+  _init(repeating){
     var _this = this;
 
-    if(this.options.full_width && !repeated){
+    if(this.options.full_width && !repeating){
       var _this = this;
-      window.onresize = function(){
-        _this.reset();
-      }
+    //  $(window).resize(this._on_window_resize);
+      $(window).bind('resize', { graph: this }, this._on_window_resize);
     }
 
     var _size = this.options.full_width?this.options.container.width():this.options.width;
@@ -131,8 +135,11 @@ class Graph {
     // parent container. Then we call d3 to select the newly created
     // div and then we can create a chart
     var graphElement = document.createElement("div");
-    $(graphElement).attr("id", this._graph_id());
+    $(graphElement).attr("id", this._graph_id()).addClass(this.options.graph_class);
     this.graph_div = $(graphElement);
+    this.graph_div.css({
+      "margin-top": this.options.margin_top
+    });
     this.options.container.append(graphElement);
     d3.select(graphElement).call(function(div) {
         div.append("div")
@@ -144,9 +151,12 @@ class Graph {
           .enter().append("div")
             .attr("class", "horizon")
             .call(graphContext.horizon()
+                    .height(_this.options.height)
                     .colors(_this._horizon_colors(_this.options.negative_color, _this.options.positive_color ))
                     .extent([_this.options.min_value, _this.options.max_value])
           );
+
+          //console.log("max value: "+_this.options.max_value);
 
         div.append("div")
             .attr("class", "rule")
@@ -154,12 +164,19 @@ class Graph {
     });
   }
 
-  _remove(){
-    $("#"+this._graph_id()).remove()
+  _on_window_resize (event){
+      var graph = event.data.graph;
+    //  console.log("on "+graph._graph_id()+" resize");
+      graph.reset();
+  }
+
+  remove(){
+    $("#"+this._graph_id()).remove();
+  //  console.log(this);
   }
 
   reset(){
-    this._remove();
+    this.remove();
     this._init(true);
   }
 
