@@ -1,4 +1,5 @@
-'use string';
+'use strict';
+
 class Graph {
 
   constructor (options){

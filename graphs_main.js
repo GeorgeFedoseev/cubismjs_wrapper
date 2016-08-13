@@ -1,5 +1,5 @@
 $(function(){
-  var last = NaN;
+
   var graph1 = new Graph({
     name: "Mr Graph",
     container: $("#graphs"),
