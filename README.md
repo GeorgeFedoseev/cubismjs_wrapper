@@ -1,6 +1,6 @@
 # Cubism.js wrapper for static data
 Wrapper for [Cubism.js](https://square.github.io/cubism/) time series visualization library.  
-Written for rendering static time series using Cubism.js (horizon mode).  
+Written for rendering static time series using Cubism.js.  
 Also includes auto color palette generation from two main colors.
 
 **Dependencies:** jquery, d3.js, cubism.js  
@@ -37,26 +37,27 @@ $(function(){
           current_val = 5;
         else if(current_val < -5)
           current_val = -5;
-  
+
         values.push(current_val);
         start += step;
       }
       callback(null, values);
     }
   }).render();
-  
+
 });
 ```
 
 ## All options:
 ``` javascript
 var default_options = {
+  mode: "horizon", // or "mirror"
   full_width: false, // graph resizes with its container
   width: 500, // constant width (works when full_width = false)
-  height: 50, // graph height 
+  height: 50, // graph height
   from_date: new Date(2016, 7, 13), // start date
   to_date: Date.now(), // end date
-  min_value: -1, 
+  min_value: -1,
   max_value: 1,
   graph_class: "graph", // class of created graph <div>
   margin_top: 10, // margin-top of graph <div>

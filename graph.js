@@ -12,6 +12,7 @@ class Graph {
       to_date: Date.now(),
       min_value: -1,
       max_value: 1,
+      mode: "horizon",
       graph_class: "graph",
       margin_top: 10,
       negative_color: "#ff4d00",
@@ -37,8 +38,8 @@ class Graph {
       return;
     }
 
-    console.log("Hello im Graph "+this.options.name);
-    console.log("My element id is #"+this._graph_id());
+    //console.log("Hello im Graph "+this.options.name);
+  //  console.log("My element id is #"+this._graph_id());
   }
 
   render(){
@@ -119,7 +120,9 @@ class Graph {
     var to_date = this.options.to_date;
     var _delay =  Date.now() - to_date;
     var _step = (to_date - from_date)/_size;
-    //console.log(_delay);
+  //  console.log(from_date);
+  //  console.log(to_date);
+  //  console.log(_delay);
   //  console.log(new Date());
 
     // create new cubism.js context to render
@@ -136,7 +139,9 @@ class Graph {
     // parent container. Then we call d3 to select the newly created
     // div and then we can create a chart
     var graphElement = document.createElement("div");
-    $(graphElement).attr("id", this._graph_id()).addClass(this.options.graph_class);
+//console.log(graphElement);
+    //console.log(graphContext);
+    $(graphElement).attr("class", this._graph_id()).addClass(this.options.graph_class);
     this.graph_div = $(graphElement);
     this.graph_div.css({
       "margin-top": this.options.margin_top
@@ -153,7 +158,12 @@ class Graph {
             .attr("class", "horizon")
             .call(graphContext.horizon()
                     .height(_this.options.height)
-                    .colors(_this._horizon_colors(_this.options.negative_color, _this.options.positive_color ))
+                    .mode(_this.options.mode)
+                    .colors(
+                      _this.options.mode=="horizon"
+                        ?_this._horizon_colors(_this.options.negative_color, _this.options.positive_color )
+                        :[_this.options.negative_color, _this.options.positive_color]
+                    )
                     .extent([_this.options.min_value, _this.options.max_value])
           );
 
