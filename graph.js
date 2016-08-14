@@ -5,6 +5,7 @@ class Graph {
   constructor (options){
 
     var default_options = {
+      id_postfix: false,
       full_width: false,
       width: 500,
       height: 50,
@@ -64,7 +65,7 @@ class Graph {
   }
 
   _graph_id(){
-    return $.trim(this.options.name).replace(" ", "_").replace(/[.|,]/ig, "");
+    return $.trim(this.options.name+(this.options.id_postfix?"_"+this.options.id_postfix:"")).replace(" ", "_").replace(/[.|,]/ig, "");
   }
 
   _horizon_colors(negative_color, positive_color){
@@ -109,6 +110,9 @@ class Graph {
   _init(repeating){
     var _this = this;
 
+    if(repeating == undefined)
+      repeating = false;
+
     if(this.options.full_width && !repeating){
       var _this = this;
     //  $(window).resize(this._on_window_resize);
@@ -142,10 +146,11 @@ class Graph {
     var graphElement = document.createElement("div");
 //console.log(graphElement);
     //console.log(graphContext);
-    $(graphElement).attr("class", this._graph_id()).addClass(this.options.graph_class);
+    $(graphElement).attr("id", this._graph_id()).addClass(this.options.graph_class);
     this.graph_div = $(graphElement);
     this.graph_div.css({
-      "margin-top": this.options.margin_top
+      "margin-top": this.options.margin_top,
+      width: _size
     });
     this.options.container.append(graphElement);
     d3.select(graphElement).call(function(div) {
