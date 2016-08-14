@@ -13,6 +13,7 @@ class Graph {
       min_value: -1,
       max_value: 1,
       mode: "horizon",
+      show_ruler: true,
       graph_class: "graph",
       margin_top: 10,
       negative_color: "#ff4d00",
@@ -148,30 +149,32 @@ class Graph {
     });
     this.options.container.append(graphElement);
     d3.select(graphElement).call(function(div) {
+      if(_this.options.show_ruler){
         div.append("div")
             .attr("class", "axis")
             .call(graphContext.axis().orient("top"));
+      }
 
-        div.selectAll(".horizon")
-            .data([graphMetric])
-          .enter().append("div")
-            .attr("class", "horizon")
-            .call(graphContext.horizon()
-                    .height(_this.options.height)
-                    .mode(_this.options.mode)
-                    .colors(
-                      _this.options.mode=="horizon"
-                        ?_this._horizon_colors(_this.options.negative_color, _this.options.positive_color )
-                        :[_this.options.negative_color, _this.options.positive_color]
-                    )
-                    .extent([_this.options.min_value, _this.options.max_value])
-          );
+      div.selectAll(".horizon")
+          .data([graphMetric])
+        .enter().append("div")
+          .attr("class", "horizon")
+          .call(graphContext.horizon()
+                  .height(_this.options.height)
+                  .mode(_this.options.mode)
+                  .colors(
+                    _this.options.mode=="horizon"
+                      ?_this._horizon_colors(_this.options.negative_color, _this.options.positive_color )
+                      :[_this.options.negative_color, _this.options.positive_color]
+                  )
+                  .extent([_this.options.min_value, _this.options.max_value])
+        );
 
-          //console.log("max value: "+_this.options.max_value);
+        //console.log("max value: "+_this.options.max_value);
 
-        div.append("div")
-            .attr("class", "rule")
-            .call(graphContext.rule());
+      div.append("div")
+          .attr("class", "rule")
+          .call(graphContext.rule());
     });
   }
 
